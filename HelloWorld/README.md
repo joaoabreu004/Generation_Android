@@ -1,10 +1,9 @@
-# Sub-repositório: Meu 1º Layout no Android
+# Sub-repositório: Meu 1º Layout utilizando o Android Studio
 
 
+<div>
 
-## ✨ LAYOUT INCIIAL PARA APRENDER A ESTRUTURA DO ***ANDROID STUDIO***!
-
-<BR>
+## ✨ LAYOUT INICIAL PARA APRENDER A ESTRUTURA DO ***ANDROID STUDIO***!
 
 
 ![](imagens/primeiro_layout.jpeg)
