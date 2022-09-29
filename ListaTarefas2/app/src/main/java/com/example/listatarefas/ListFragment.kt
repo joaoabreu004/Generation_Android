@@ -29,34 +29,6 @@ class ListFragment : Fragment() {
         //val view = inflater.inflate(R.layout.fragment_list, container, false)
 
 
-
-        val listaTarefas = listOf(
-            Tarefa(
-                nome = "Treino Academia",
-                descricao = "Dia de bíceps e tríceps",
-                responsavel = "João Abreu",
-                data = "2022-09-30",
-                status = false,
-                categoria = "Auto Cuidado"
-            ),
-            Tarefa(
-                nome = "Treino Academia",
-                descricao = "Dia de bíceps e tríceps",
-                responsavel = "João Abreu",
-                data = "2022-09-30",
-                status = false,
-                categoria = "Auto Cuidado"
-            ),
-            Tarefa(
-                nome = "Treino Academia",
-                descricao = "Dia de bíceps e tríceps",
-                responsavel = "João Abreu",
-                data = "2022-09-30",
-                status = false,
-                categoria = "Auto Cuidado"
-            )
-        )
-
         binding.floatingAdd.setOnClickListener{
             findNavController().navigate(R.id.action_listFragment_to_formFragment)
         }
@@ -69,7 +41,6 @@ class ListFragment : Fragment() {
         binding.recyclerTarefa.adapter = adapter
         binding.recyclerTarefa.setHasFixedSize(true)
 
-        adapter.setList(listaTarefas)
 
         return binding.root
     }
