@@ -6,10 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.listatarefas.adapter.TarefaAdapter
+import com.example.listatarefas.databinding.FragmentListBinding
+import com.example.listatarefas.model.Tarefa
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class ListFragment : Fragment() {
+
+
+    private lateinit var binding: FragmentListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -17,15 +24,53 @@ class ListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        binding = FragmentListBinding.inflate(layoutInflater, container, false)
+
+        //val view = inflater.inflate(R.layout.fragment_list, container, false)
 
 
-        val buttonFlutuante = view.findViewById<FloatingActionButton>(R.id.floatingAdd)
 
-        buttonFlutuante.setOnClickListener{
+        val listaTarefas = listOf(
+            Tarefa(
+                nome = "Treino Academia",
+                descricao = "Dia de bíceps e tríceps",
+                responsavel = "João Abreu",
+                data = "2022-09-30",
+                status = false,
+                categoria = "Auto Cuidado"
+            ),
+            Tarefa(
+                nome = "Treino Academia",
+                descricao = "Dia de bíceps e tríceps",
+                responsavel = "João Abreu",
+                data = "2022-09-30",
+                status = false,
+                categoria = "Auto Cuidado"
+            ),
+            Tarefa(
+                nome = "Treino Academia",
+                descricao = "Dia de bíceps e tríceps",
+                responsavel = "João Abreu",
+                data = "2022-09-30",
+                status = false,
+                categoria = "Auto Cuidado"
+            )
+        )
+
+        binding.floatingAdd.setOnClickListener{
             findNavController().navigate(R.id.action_listFragment_to_formFragment)
         }
 
-        return view
+
+        //CONFIGURAÇÃO DO RECYCLEVIEW
+        val adapter = TarefaAdapter()
+        //UM CARD ACIMA DO OUTRO
+        binding.recyclerTarefa.layoutManager = LinearLayoutManager(context)
+        binding.recyclerTarefa.adapter = adapter
+        binding.recyclerTarefa.setHasFixedSize(true)
+
+        adapter.setList(listaTarefas)
+
+        return binding.root
     }
 }
