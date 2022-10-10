@@ -3,10 +3,12 @@ package com.example.listatarefas.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.listatarefas.MainViewModel
 import com.example.listatarefas.databinding.CardLayoutBinding
+import com.example.listatarefas.model.Categoria
 import com.example.listatarefas.model.Tarefa
 
-class TarefaAdapter :  RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
+class TarefaAdapter(val taskClickListener: TaskClickListener, val mainViewModel: MainViewModel) :  RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
 
     private var listTarefa = emptyList<Tarefa>()
 
@@ -29,6 +31,14 @@ class TarefaAdapter :  RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
         holder.binding.switchProgresso.isChecked = tarefa.status
         holder.binding.textCategoria.text = tarefa.categoria.descricao
 
+        //SABER O QUE FAZER COM O ITEM SELECIONADO.
+        holder.itemView.setOnClickListener{
+            taskClickListener.onTaskClickListener(tarefa)
+        }
+        holder.binding.switchProgresso.setOnCheckedChangeListener { compoundButton, ativo ->
+            tarefa.status = ativo
+            mainViewModel.updateTarefa(tarefa)
+        }
     }
 
     //SABER QUANTAS VEZES SERÁ CRIAR COMPONENTES
@@ -37,7 +47,10 @@ class TarefaAdapter :  RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
     }
 
     fun setList(list: List<Tarefa>){
-        listTarefa = list
+        // recebe  a lista externa
+        listTarefa = list.sortedByDescending { it.id }
+        // avisa o adapter que ocorreu uma alteração
         notifyDataSetChanged()
     }
+
 }

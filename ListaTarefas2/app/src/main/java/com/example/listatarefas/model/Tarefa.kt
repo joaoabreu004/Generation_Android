@@ -1,7 +1,9 @@
 package com.example.listatarefas.model
 
 data class Tarefa
-    (var nome: String,
+    (
+     var id: Long,
+     var nome: String,
      var descricao: String,
      var responsavel: String,
      var data: String,
